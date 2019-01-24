@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform, Button } from 'react-native';
-import { Container, Content } from 'native-base';
+import { StyleSheet, View, Platform, Button } from 'react-native';
+import { types } from '../../constants/auth';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,29 +9,26 @@ const styles = StyleSheet.create({
 });
 
 class Home extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-  };
-
-  componentDidMount() {
-    console.log('COMPONENT HOME MOUNTED!');
-  }
-
   render() {
     console.log(Platform.OS);
 
     return (
-      <Container>
-        <Content>
-          <View style={styles.container}>
-            <Text>Home Page</Text>
-            <Button
-              title="Go to Profile"
-              onPress={() => this.props.navigation.navigate('Profile', { otherParam: 'Profile' })}
-            />
-          </View>
-        </Content>
-      </Container>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Button
+          title="Sign Up"
+          onPress={() =>
+            this.props.navigation.push('Auth', {
+              type: types.SIGN_UP,
+            })}
+        />
+         <Button
+          title="Sign In"
+          onPress={() =>
+            this.props.navigation.push('Auth', {
+              type: types.SIGN_IN,
+            })}
+        />
+      </View>
     );
   }
 };
