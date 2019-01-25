@@ -10,20 +10,18 @@ class Auth extends React.Component {
     success: false,
   }
 
-  fetchAuth = (func) => {
-    return async function(values) {
-      try {
-        this.setState({ isFetching: true });
+  signUp = (values) => {
+    this.setState({ isFetching: true });
 
-        const response = await func(values.email, values.password);
-
-        if (response) {
-          this.setState({
-            isFetching: false,
-            success: true,
-          });
-        }
-      } catch (error) {
+    firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
+      .then(() => {
+        this.setState({
+          isFetching: false,
+          error: '',
+          success: true,
+        });
+      })
+      .catch(error => {
         const message = error.message;
 
         this.setState({
@@ -31,32 +29,39 @@ class Auth extends React.Component {
           error: message,
           success: false,
         });
-      }
-    }
+      });
   }
 
-  // async signIn(values) {
-  //   try {
-  //     const response = await firebase.auth().signInWithEmailAndPassword(values.email, values.password);
+  signIn = (values) => {
+    this.setState({ isFetching: true });
 
-  //     console.log(response);
-  //   } catch (error) {
-  //     const type = error.code;
-  //     const message = error.message;
+    firebase.auth().signInWithEmailAndPassword(values.email, values.password)
+      .then(() => {
+        this.setState({
+          isFetching: false,
+          error: '',
+          success: true,
+        });
+      })
+      .catch(error => {
+        const message = error.message;
 
-  //     alert(`Error Type: ${type}\nError Message: ${message}`);
-  //   }
-  // }
+        this.setState({
+          isFetching: false,
+          error: message,
+          success: false,
+        });
+      });
+  }
 
   render() {
     const { isFetching, error, success } = this.state;
-    console.log(isFetching, error, success);
     const { navigation } = this.props;
     const type = navigation.getParam('type', types.SIGN_UP);
     const label = type === types.SIGN_IN ? 'Sign In' : 'Sign Up';
-    const onSubmit = type === types.SIGN_IN
-      ? this.fetchAuth(firebase.auth().signInWithEmailAndPassword) 
-      : this.fetchAuth(firebase.auth().createUserWithEmailAndPassword);
+    const onSubmit = type === types.SIGN_IN ? this.signIn : this.signUp;
+
+    console.log(`IS FETCHING: ${isFetching}, ERROR: ${error}, SUCCESS: ${success}`);
 
     return (
       <Form label={label} onSubmit={onSubmit} />
