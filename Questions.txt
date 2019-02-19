@@ -1,0 +1,15 @@
+0) Postman
+  Чем отличаются методы getPlaylistsIndex, getPlaylist, одинаковые примеры запросов.
+1) Playlists.js:76
+  Как формируется currentPlaylists и откуда он в state?
+2) PlaylistIndex.js:61
+  Зачем вызывать this.getPlaylist(), если этот метод вызывается в componentDidMount?
+3) PlaylistIndex.js:101
+  Зачем дублировать this.handleCreateNewPlaylist?
+4) PlaylistIndex.js:this.handleCreateNewPlaylist(e, title)
+  Зачем передавать title, если title берется из state?
+5) PlaylistView.js:230,237
+  Этих полей нет в state
+6) PlaylistAddAutoSuggest.js:jsSetup()
+  Очень странный метод
+7)

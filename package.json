@@ -16,6 +16,7 @@
     "native-base": "^2.10.0",
     "react": "^16.6.0-alpha.8af6728",
     "react-native": "^0.57.8",
+    "react-native-card-flip": "^1.0.4",
     "react-navigation": "^3.0.9",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1"

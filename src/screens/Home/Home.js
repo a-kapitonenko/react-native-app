@@ -48,16 +48,16 @@ class Home extends React.Component {
               <Button
                 title="Sign Up"
                 onPress={() =>
-                  this.props.navigation.push('Auth', {
-                    type: types.SIGN_UP,
-                  })}
+                  this.props.navigation.push('Profile')}
               />
               <Button
                 title="Sign In"
                 onPress={() =>
-                  this.props.navigation.push('Auth', {
-                    type: types.SIGN_IN,
-                  })}
+                  this.props.navigation.push('Main')}
+                // onPress={() =>
+                //   this.props.navigation.push('Auth', {
+                //     type: types.SIGN_IN,
+                //   })}
               />
             </React.Fragment>
           )
